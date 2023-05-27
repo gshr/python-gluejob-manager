@@ -5,7 +5,6 @@ from typing import Optional
 
 class GlueModel(BaseModel):
     jobname : str
-    role : str 
     pythonversion : str = '3'
     description : Optional[str] 
     workertype : str = 'Standard'
