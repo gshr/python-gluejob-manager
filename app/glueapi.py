@@ -5,7 +5,7 @@ from fastapi import APIRouter,HTTPException,File,UploadFile,Depends
 from .deps import s3_client,glue_client
 from .models import GlueModel
 from fastapi.encoders import jsonable_encoder
-from .helper import create_job
+from .helper import create_glue_job
 router = APIRouter(tags=['glueapi'])
 
    
@@ -17,6 +17,7 @@ def get_jobs(glue:BaseClient=Depends(glue_client)):
     print(response)
     if len(response['Jobs']) ==0:
         raise HTTPException(status_code=404, detail="No Glue Jobs Available")
+    return response
     
 
 @router.post('/job',status_code=201)
@@ -30,18 +31,18 @@ def create_job(job:GlueModel=Depends(),
     scriptlocation = f"s3://aws-orders/{file.filename}"
     print(scriptlocation)
     
-    # response = create_job(glue=glue,
-    #                       jobname=job.jobname,
-    #                       scriptlocation=scriptlocation,
-    #                       glueversion=job.glueversion,
-    #                       numberofworkers=job.numberofworkers,
-    #                       workertype=job.workertype,
-    #                       role= job.role)
-    # print(response)
+    response = create_glue_job(glue=glue,
+                          jobname=job.jobname,
+                          scriptlocation=scriptlocation,
+                          glueversion=job.glueversion,
+                          numberofworkers=job.numberofworkers,
+                          workertype=job.workertype,
+                          role= job.role)
+    print(response)
 
 
                           
-    #    )
+  
     
 
 #     response = glue.create_job(

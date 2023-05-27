@@ -1,6 +1,6 @@
 import json
 
-def create_job(glue,
+def create_glue_job(glue,
                jobname,
                scriptlocation,
                glueversion,
