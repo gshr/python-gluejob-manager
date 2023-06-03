@@ -12,4 +12,5 @@
 
 1. Clone the source code to your system and setup aws credentials
 2. Create a virtual env and install all requirement.txt 
-3. Run the code by using command  " uvicorn main:app --reload :
+3. Run the code by using command  
+       ## "uvicorn main:app --reload"
